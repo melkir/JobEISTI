@@ -15,7 +15,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers("/webjars/**").permitAll();
         http.authorizeRequests().antMatchers("/css/**").permitAll();
         http.authorizeRequests()
-                    .antMatchers("/", "/home", "/index", "/register").permitAll()
+                    .antMatchers("/", "/home", "/register").permitAll()
                     .anyRequest().authenticated()
                     .and()
                 .formLogin()
