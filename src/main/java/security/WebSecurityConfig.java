@@ -12,9 +12,10 @@ import org.springframework.security.config.annotation.web.servlet.configuration.
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http
-                .authorizeRequests()
-                    .antMatchers("/", "/home", "/register").permitAll()
+        http.authorizeRequests().antMatchers("/webjars/**").permitAll();
+        http.authorizeRequests().antMatchers("/css/**").permitAll();
+        http.authorizeRequests()
+                    .antMatchers("/", "/home", "/index", "/register").permitAll()
                     .anyRequest().authenticated()
                     .and()
                 .formLogin()
