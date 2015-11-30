@@ -27,3 +27,7 @@ dependencies {
     compile("org.webjars:bootstrap:4.0.0-alpha")
     testCompile("junit:junit")
 }
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.9'
+}
