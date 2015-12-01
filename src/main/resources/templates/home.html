@@ -1,11 +1,28 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <title>JobEISTI</title>
+    <link th:href="@{/webjars/bootstrap/3.3.6/css/bootstrap.min.css}" rel="stylesheet"/>
 </head>
+
 <body>
-<h1>JobEISTI</h1>
-<p><a th:href="@{/register}">Inscrivez-vous avec votre adresse email</a></p>
-<p><a th:href="@{/login}">Vous avez déjà un compte ? Connectez-vous</a></p>
+
+<div class="container">
+    <h2>JobEISTI</h2> <br/><br/>
+
+    <p><a th:href="@{/registration}">Inscrivez-vous avec votre adresse email</a></p>
+
+    <p><a th:href="@{/login}">Vous avez déjà un compte ? Connectez-vous</a></p>
+
+    <p><a th:href="@{/admin}">Espace administrateur</a></p>
+
+    <p><a th:href="@{/user}">Espace utilisateur</a></p>
+
+    <p><a th:href="@{/upload}">Uploader un fichier</a></p>
+
+</div>
+
 </body>
+
 </html>
