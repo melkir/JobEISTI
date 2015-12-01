@@ -20,7 +20,7 @@ public class Application {
     }
 
     @Bean
-    public CommandLineRunner demo(UserRepository repository) {
+    public CommandLineRunner demo(@SuppressWarnings("SpringJavaAutowiringInspection") UserRepository repository) {
         return (args) -> {
             // save a couple of customers
             repository.save(new User("Jack", "Bauer", "email@gmail.com"));
