@@ -16,6 +16,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         // Grant resource permissions
         http.authorizeRequests().antMatchers("/webjars/**").permitAll();
         http.authorizeRequests().antMatchers("/css/**").permitAll();
+        // Roles permissions based on directories
+        http.authorizeRequests()
+                .antMatchers("/user/**").access("hasRole('USER')")
+                .antMatchers("/ent/**").access("hasRole('ENTERPRISE')")
+                .antMatchers("/admin/**").access("hasRole('ADMIN')");
+        // Roles permissions for other requests
         http.authorizeRequests()
                 // All user can access
                 .antMatchers("/", "/home", "/register").permitAll()
@@ -33,8 +39,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        // Add two login | cookie "JSESSIONID"
+        // Add 3 login : user, admin and enterprise - cookie "JSESSIONID"
         auth.inMemoryAuthentication().withUser("user").password("user").roles("USER");
         auth.inMemoryAuthentication().withUser("admin").password("admin").roles("ADMIN");
+        auth.inMemoryAuthentication().withUser("ent").password("ent").roles("ENTERPRISE");
     }
 }
