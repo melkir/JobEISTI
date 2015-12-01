@@ -12,6 +12,9 @@ import org.springframework.security.config.annotation.web.servlet.configuration.
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
+    CustomSuccessHandler customSuccessHandler;
+
+    @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         // In memory login - cookie "JSESSIONID"
         auth.inMemoryAuthentication().withUser("user").password("user").roles("USER");
@@ -36,7 +39,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 // Other requests need the login
                 .anyRequest().authenticated()
                 // Configure the login page
-                .and().formLogin().loginPage("/login").permitAll()
+                .and().formLogin().loginPage("/login").successHandler(customSuccessHandler).permitAll()
                 // Default logout from Spring Security
                 .and().logout().permitAll();
     }
