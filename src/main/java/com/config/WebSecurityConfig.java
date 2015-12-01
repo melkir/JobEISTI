@@ -13,22 +13,27 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable(); // temporary disabled for testing file upload
+        // Grant resource permissions
         http.authorizeRequests().antMatchers("/webjars/**").permitAll();
         http.authorizeRequests().antMatchers("/css/**").permitAll();
         http.authorizeRequests()
-                    .antMatchers("/", "/home", "/register").permitAll()
+                // All user can access
+                .antMatchers("/", "/home", "/register").permitAll()
                     .anyRequest().authenticated()
                     .and()
+                // Other routing need login
                 .formLogin()
                     .loginPage("/login")
                     .permitAll()
                     .and()
+                // Default logout from Spring Security
                 .logout()
                     .permitAll();
     }
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+        // Add two login | cookie "JSESSIONID"
         auth.inMemoryAuthentication().withUser("user").password("user").roles("USER");
         auth.inMemoryAuthentication().withUser("admin").password("admin").roles("ADMIN");
     }

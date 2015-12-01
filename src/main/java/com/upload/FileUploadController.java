@@ -14,11 +14,13 @@ import java.io.FileOutputStream;
 @Controller
 public class FileUploadController {
 
+    // Routing GET method to the upload.html form
     @RequestMapping(value = "/upload", method = RequestMethod.GET)
     public String provideUploadInfo() {
         return "upload";
     }
 
+    // Routing POST form with the name and the file to internal server storage
     @RequestMapping(value = "/upload", method = RequestMethod.POST)
     @ResponseBody
     public String handleFileUpload(@RequestParam("name") String name, @RequestParam("file") MultipartFile file) {
