@@ -14,6 +14,6 @@ Copy the following link : https://github.com/melkir/JobEISTI.git
 
 Choose an destination repertory > Clone
 
-2) Select Yes for checkout > Import project from external model > Gadle
+2) Select Yes for checkout > Import project from external model > Gradle
 
 3) Use auto-import, Create directories for empy content root > Finish
