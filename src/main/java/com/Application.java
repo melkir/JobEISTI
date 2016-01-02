@@ -10,7 +10,9 @@ public class Application {
 
     private static final Logger log = LoggerFactory.getLogger(Application.class);
 
-    /** Run the application */
+    /**
+     * Run the application
+     */
     public static void main(String[] args) throws Throwable {
         SpringApplication.run(Application.class, args);
     }

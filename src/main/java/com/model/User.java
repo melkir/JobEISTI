@@ -4,6 +4,8 @@ import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class User {
@@ -17,12 +19,19 @@ public class User {
     private String lastName;
     @Email(message = "Please provide a valid email address.")
     @NotEmpty(message = "Email is required.")
-    @Column(unique=true, nullable = false)
+    @Column(unique = true, nullable = false)
     private String email;
+    @Column(unique = true, nullable = false)
+    private String username;
     @NotEmpty(message = "Password is required.")
     private String password;
 
-    public User() {}
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
+    private Set<UserRole> userRoles = new HashSet<>(0);
+
+
+    public User() {
+    }
 
     public User(User user) {
         this.id = user.id;
@@ -56,6 +65,14 @@ public class User {
         this.lastName = lastName;
     }
 
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
     public String getEmail() {
         return email;
     }
@@ -70,6 +87,14 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Set<UserRole> getUserRoles() {
+        return userRoles;
+    }
+
+    public void setUserRoles(Set<UserRole> userRoles) {
+        this.userRoles = userRoles;
     }
 
     @Override

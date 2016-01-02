@@ -8,7 +8,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.annotation.web.servlet.configuration.EnableWebMvcSecurity;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Configuration
 @EnableWebMvcSecurity
@@ -19,7 +18,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     CustomSuccessHandler customSuccessHandler;
 
 	/*    
-	@Autowired
+    @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         // In memory login - cookie "JSESSIONID"
         auth.inMemoryAuthentication().withUser("user").password("user").roles("USER");
@@ -30,7 +29,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth, UserDetailsService userDetailsService) throws Exception {
-    	// login with hibernate and encode password
+        // login with hibernate and encode password
         auth.userDetailsService(userDetailsService);
     }
 
@@ -42,8 +41,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         // Grant resource permissions
         http.authorizeRequests().antMatchers("/webjars/**").permitAll();
         http.authorizeRequests().antMatchers("/css/**").permitAll();
-        // Grant access to the database console
-        http.authorizeRequests().antMatchers("/h2/**").permitAll();
         // Roles permissions
         http.authorizeRequests()
                 // All user can access
@@ -52,6 +49,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/user/**").access("hasRole('USER')")
                 .antMatchers("/ent/**").access("hasRole('ENTERPRISE')")
                 .antMatchers("/admin/**").access("hasRole('ADMIN')")
+                .antMatchers("/db/**").access("hasRole('DBA')")
                 // Other requests need the login
                 .anyRequest().authenticated()
                 // Configure the login page

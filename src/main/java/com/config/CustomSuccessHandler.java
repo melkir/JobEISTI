@@ -39,11 +39,11 @@ public class CustomSuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
     protected String determineTargetUrl(Authentication authentication) {
         Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
         List<String> roles = authorities.stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList());
-
         String url;
         if (isAdmin(roles)) url = "/admin";
         else if (isEnt(roles)) url = "/ent";
         else if (isUser(roles)) url = "/home";
+        else if (isDba(roles)) url = "/db";
         else url = "/login?error";
 
         return url;
@@ -61,11 +61,15 @@ public class CustomSuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
         return roles.contains("ROLE_ENTERPRISE");
     }
 
-    public void setRedirectStrategy(RedirectStrategy redirectStrategy) {
-        this.redirectStrategy = redirectStrategy;
+    private boolean isDba(List<String> roles) {
+        return roles.contains("ROLE_DBA");
     }
 
     protected RedirectStrategy getRedirectStrategy() {
         return redirectStrategy;
+    }
+
+    public void setRedirectStrategy(RedirectStrategy redirectStrategy) {
+        this.redirectStrategy = redirectStrategy;
     }
 }
