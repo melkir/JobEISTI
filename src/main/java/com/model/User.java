@@ -26,7 +26,7 @@ public class User {
     @NotEmpty(message = "Password is required.")
     private String password;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user", cascade = CascadeType.ALL)
     private Set<UserRole> userRoles = new HashSet<>(0);
 
 
@@ -95,6 +95,10 @@ public class User {
 
     public void setUserRoles(Set<UserRole> userRoles) {
         this.userRoles = userRoles;
+    }
+
+    public void addRole(String role) {
+        this.userRoles.add(new UserRole(this, role));
     }
 
     @Override

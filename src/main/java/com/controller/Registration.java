@@ -2,6 +2,8 @@ package com.controller;
 
 import com.dao.UserRepository;
 import com.model.User;
+import com.model.UserRole;
+import com.model.UserRoleType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,6 +26,7 @@ public class Registration {
 
     @RequestMapping(method = RequestMethod.POST)
     public String registerUser(@ModelAttribute User user, Model model) {
+        user.addRole(UserRoleType.USER.getRole());
         userRepository.save(user);
         model.addAttribute("user", user);
         return "userDetails";

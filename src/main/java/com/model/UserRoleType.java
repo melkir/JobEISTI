@@ -1,10 +1,10 @@
 package com.model;
 
 public enum UserRoleType {
-    USER("ROLE_USER"),
-    ENTERPRISE("ROLE_ENTERPRISE"),
-    DBA("ROLE_DBA"),
-    ADMIN("ROLE_ADMIN");
+    USER("USER"),
+    ENTERPRISE("ENTERPRISE"),
+    DBA("DBA"),
+    ADMIN("ADMIN");
 
     String userRoleType;
 
