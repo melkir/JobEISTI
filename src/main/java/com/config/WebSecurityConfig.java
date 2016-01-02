@@ -44,7 +44,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         // Roles permissions
         http.authorizeRequests()
                 // All user can access
-                .antMatchers("/", "/home", "/registration").permitAll()
+                .antMatchers("/", "/home", "/register").permitAll()
                 // Directories access permissions
                 .antMatchers("/user/**").access("hasRole('USER')")
                 .antMatchers("/ent/**").access("hasRole('ENTERPRISE')")
