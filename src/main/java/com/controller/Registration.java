@@ -2,7 +2,6 @@ package com.controller;
 
 import com.dao.UserRepository;
 import com.model.User;
-import com.model.UserRoleType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -24,7 +23,7 @@ public class Registration {
     @Autowired
     UserRepository userRepository;
     @Autowired
-    protected AuthenticationManager authenticationManager;
+    AuthenticationManager authenticationManager;
 
     @RequestMapping(method = RequestMethod.GET)
     public String registerForm(Model model) {
@@ -34,9 +33,7 @@ public class Registration {
 
     @RequestMapping(method = RequestMethod.POST)
     public String registerUser(@ModelAttribute("user") User user, HttpServletRequest request) {
-        String userRole = UserRoleType.USER.getRole();
-        user.addRole(userRole); // attach the user role by default
-        userRepository.save(user);
+        userRepository.createUser(user);
         authenticateUserAndSetSession(user, request); // auto-login after registration
         return "home";
     }
