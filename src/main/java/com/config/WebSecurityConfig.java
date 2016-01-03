@@ -30,13 +30,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers("/css/**").permitAll();
         // Roles permissions
         http.authorizeRequests()
-                // All user can access
-                .antMatchers("/", "/home", "/register").permitAll()
                 // Directories access permissions
-                .antMatchers("/user/**").access("hasRole('USER')")
-                .antMatchers("/ent/**").access("hasRole('ENTERPRISE')")
-                .antMatchers("/admin/**").access("hasRole('ADMIN')")
-                .antMatchers("/db/**").access("hasRole('DBA')")
+                .antMatchers("/user").access("hasRole('USER')")
+                .antMatchers("/ent").access("hasRole('ENTERPRISE')")
+                .antMatchers("/admin").access("hasRole('ADMIN')")
+                .antMatchers("/db").access("hasRole('DBA')")
+                // All user can access
+                .antMatchers("/**").permitAll()
                 // Other requests need the login
                 .anyRequest().authenticated()
                 // Configure the login page
