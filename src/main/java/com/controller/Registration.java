@@ -35,7 +35,7 @@ public class Registration {
     public String registerUser(@ModelAttribute("user") User user, HttpServletRequest request) {
         userRepository.createUser(user);
         authenticateUserAndSetSession(user, request); // auto-login after registration
-        return "home";
+        return "redirect:/home";
     }
 
     private void authenticateUserAndSetSession(User user, HttpServletRequest request) {

@@ -31,11 +31,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         // Roles permissions
         http.authorizeRequests()
                 // Directories access permissions
-                .antMatchers("/user").access("hasRole('USER')")
-                .antMatchers("/ent").access("hasRole('ENTERPRISE')")
-                .antMatchers("/admin").access("hasRole('ADMIN')")
-                .antMatchers("/db").access("hasRole('DBA')")
-                // All user can access
+                .antMatchers("/user/**").access("hasRole('USER')")
+                .antMatchers("/ent/**").access("hasRole('ENTERPRISE')")
+                .antMatchers("/admin/**").access("hasRole('ADMIN')")
+                .antMatchers("/db/**").access("hasRole('DBA')")
+                // All user can access to new routes at the root
                 .antMatchers("/**").permitAll()
                 // Other requests need the login
                 .anyRequest().authenticated()

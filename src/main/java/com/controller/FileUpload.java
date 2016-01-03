@@ -1,4 +1,4 @@
-package com.upload;
+package com.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,7 +12,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 
 @Controller
-public class FileUploadController {
+public class FileUpload {
 
     // Routing GET method to the upload.html form
     @RequestMapping(value = "/upload", method = RequestMethod.GET)
