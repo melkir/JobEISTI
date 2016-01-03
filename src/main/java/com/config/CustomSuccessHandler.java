@@ -41,7 +41,7 @@ public class CustomSuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
         List<String> roles = authorities.stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList());
         String url;
         if (isAdmin(roles)) url = "/admin";
-        else if (isEnt(roles)) url = "/ent";
+        else if (isEnt(roles)) url = "/enterprise";
         else if (isUser(roles)) url = "/home";
         else if (isDba(roles)) url = "/db";
         else url = "/login?error";
