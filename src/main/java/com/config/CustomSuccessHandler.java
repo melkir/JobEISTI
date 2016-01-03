@@ -23,12 +23,10 @@ public class CustomSuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
     protected void handle(HttpServletRequest request, HttpServletResponse response, Authentication authentication)
             throws IOException {
         String targetUrl = determineTargetUrl(authentication);
-
         if (response.isCommitted()) {
-            System.out.println("Can't redirect");
+            System.err.println("Can't redirect");
             return;
         }
-
         redirectStrategy.sendRedirect(request, response, targetUrl);
     }
 
