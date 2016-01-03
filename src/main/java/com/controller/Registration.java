@@ -2,14 +2,20 @@ package com.controller;
 
 import com.dao.UserRepository;
 import com.model.User;
-import com.model.UserRole;
 import com.model.UserRoleType;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import javax.servlet.http.HttpServletRequest;
 
 @Controller
 @RequestMapping(value = "/register")
@@ -17,6 +23,8 @@ public class Registration {
 
     @Autowired
     UserRepository userRepository;
+    @Autowired
+    protected AuthenticationManager authenticationManager;
 
     @RequestMapping(method = RequestMethod.GET)
     public String registerForm(Model model) {
@@ -25,11 +33,22 @@ public class Registration {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public String registerUser(@ModelAttribute User user, Model model) {
-        user.addRole(UserRoleType.USER.getRole());
+    public String registerUser(@ModelAttribute("user") User user, HttpServletRequest request) {
+        String userRole = UserRoleType.USER.getRole();
+        user.addRole(userRole); // attach the user role by default
         userRepository.save(user);
-        model.addAttribute("user", user);
-        return "userDetails";
+        authenticateUserAndSetSession(user, request); // auto-login after registration
+        return "home";
+    }
+
+    private void authenticateUserAndSetSession(User user, HttpServletRequest request) {
+        String username = user.getUsername(), password = user.getPassword();
+        UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(username, password);
+        // generate session if one doesn't exist
+        request.getSession();
+        token.setDetails(new WebAuthenticationDetails(request));
+        Authentication authenticatedUser = authenticationManager.authenticate(token);
+        SecurityContextHolder.getContext().setAuthentication(authenticatedUser);
     }
 
 }
