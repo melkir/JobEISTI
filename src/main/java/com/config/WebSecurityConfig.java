@@ -28,11 +28,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         // Grant resource permissions
         http.authorizeRequests().antMatchers("/webjars/**").permitAll();
         http.authorizeRequests().antMatchers("/css/**").permitAll();
+        http.authorizeRequests().antMatchers("/js/**").permitAll();
         // Roles permissions
         http.authorizeRequests()
                 // Directories access permissions
                 .antMatchers("/user/**").access("hasRole('USER')")
-                .antMatchers("/ent/**").access("hasRole('ENTERPRISE')")
+                .antMatchers("/enterprise/**").access("hasRole('ENTERPRISE')")
                 .antMatchers("/admin/**").access("hasRole('ADMIN')")
                 .antMatchers("/db/**").access("hasRole('DBA')")
                 // All user can access to new routes at the root
