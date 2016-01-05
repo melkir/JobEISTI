@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-@RequestMapping(value = "/login")
-public class Login {
+@RequestMapping(value = "/login/recover")
+public class Recover {
 
     @Autowired
     UserRepository userRepository;
@@ -20,12 +20,12 @@ public class Login {
     @Autowired
     MailService mailService;
 
-    @RequestMapping(value = "/recover", method = RequestMethod.GET)
+    @RequestMapping(method = RequestMethod.GET)
     public String resetPasswordForm() {
         return "recover_password";
     }
 
-    @RequestMapping(value = "/recover", method = RequestMethod.POST)
+    @RequestMapping(method = RequestMethod.POST)
     @ResponseBody
     public String resetPassword(@ModelAttribute("email") String email) {
         User user = userRepository.findByEmail(email);
