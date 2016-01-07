@@ -3,22 +3,89 @@
 
 <head>
     <title>JobEISTI</title>
-    <link th:href="@{/webjars/bootstrap/3.3.6/css/bootstrap.min.css}" rel="stylesheet"/>
+    <link th:href="@{/css/font-awesome.min.css}" rel="stylesheet"/>
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet"/>
+    <link th:href="@{/css/uniform.default.min.css}" rel="stylesheet"/>
+    <link th:href="@{/css/bootstrap-switch.min.css}" rel="stylesheet"/>
+    <link th:href="@{/css/plugins/select2.min.css}" rel="stylesheet" type="text/css" />
+    <link th:href="@{/css/plugins/select2-bootstrap.min.css}" rel="stylesheet" type="text/css" />
+    <link th:href="@{/css/components-md.min.css}" rel="stylesheet" type="text/css" />
+    <link th:href="@{/css/plugins-md.min.css}" rel="stylesheet" type="text/css" />
+    <link th:href="@{/css/pages/login.css}" rel="stylesheet"/>
 </head>
 
-<body>
+<body class=" login">
+<!-- BEGIN LOGO -->
+<div class="logo"><h2 class="">Job'EISTI</h2></div>
+<!-- END LOGO -->
+<!-- BEGIN LOGIN -->
+<div class="content">
+    <!-- BEGIN LOGIN FORM -->
+    <form class="login-form" th:action="@{/login}" method="post">
+        <h3 class="form-title font-green">Connexion</h3>
+        <div class="alert alert-danger display-hide">
+            <a class="pull-right" data-close="alert"><i class="fa fa-times"></i></a>
+                <span> Veuillez remplir les champs ci-dessous. </span>
+        </div>
+        <div th:if="${param.error}" class="alert alert-danger">
+            <a class="pull-right" data-close="alert"><i class="fa fa-times"></i></a>
+                <span> Identifiant ou mot de passe invalide. </span>
+        </div>
+        <div th:if="${param.logout}" class="alert alert-danger">
+            <a class="pull-right" data-close="alert"><i class="fa fa-times"></i></a>
+            <span> Vous avez été déconnecté. </span>
+        </div>
 
-<div class="container">
-    <h2>JobEISTI</h2> <br/><br/>
-
-    <p><a th:href="@{/register}">Inscrivez-vous avec votre adresse email</a></p>
-
-    <p><a th:href="@{/login}">Vous avez déjà un compte ? Connectez-vous</a></p>
-
-    <p><a th:href="@{/upload}">Uploader un fichier</a></p>
-
+        <div class="form-group">
+            <input class="form-control form-control-solid placeholder-no-fix" type="text" autocomplete="off" placeholder="Nom d'utilisateur" name="username" /> </div>
+        <div class="form-group">
+            <input class="form-control form-control-solid placeholder-no-fix" type="password" autocomplete="off" placeholder="Mot de passe" name="password" /> </div>
+        <div class="form-actions">
+            <button type="submit" class="btn green uppercase">Connexion</button>
+            <a href="javascript:;" id="forget-password" class="forget-password"> Mot de passe oublié ?</a>
+        </div>
+        <div class="create-account">
+            <p>
+                <a th:href="@{/register}" id="register-btn" class="uppercase">S'inscrire</a>
+            </p>
+        </div>
+    </form>
+    <!-- END LOGIN FORM -->
+    <!-- BEGIN FORGOT PASSWORD FORM -->
+    <form class="forget-form" th:action="@{/login/recover}" method="post">
+        <h3 class="font-green">Mot de passe oublié ?</h3>
+        <p> Entrez votre adresse email pour réinitialiser votre mot de passe. </p>
+        <div class="form-group">
+            <input class="form-control placeholder-no-fix" type="text" autocomplete="off" placeholder="Email" name="email" /> </div>
+        <div class="form-actions">
+            <button type="button" id="back-btn" class="btn btn-default">Précédent</button>
+            <button type="submit" class="btn btn-success uppercase pull-right">Réinitialiser</button>
+        </div>
+    </form>
+    <!-- END FORGOT PASSWORD FORM -->
 </div>
-
+<!-- BEGIN CORE PLUGINS -->
+<script th:src="@{/js/jquery.min.js}" type="text/javascript"></script>
+<script th:src="@{/js/bootstrap.min.js}" type="text/javascript"></script>
+<script th:src="@{/js/bootstrap-hover-dropdown.min.js}" type="text/javascript"></script>
+<script th:src="@{/js/jquery.slimscroll.min.js}" type="text/javascript"></script>
+<script th:src="@{/js/jquery.blockui.min.js}" type="text/javascript"></script>
+<script th:src="@{/js/jquery.uniform.min.js}" type="text/javascript"></script>
+<script th:src="@{/js/bootstrap-switch.min.js}" type="text/javascript"></script>
+<!-- END CORE PLUGINS -->
+<!-- BEGIN PAGE LEVEL PLUGINS -->
+<script th:src="@{/js/jquery.validate.min.js}" type="text/javascript"></script>
+<script th:src="@{/js/additional-methods.min.js}" type="text/javascript"></script>
+<script th:src="@{/js/select2.full.min.js}" type="text/javascript"></script>
+<!-- END PAGE LEVEL PLUGINS -->
+<!-- BEGIN THEME GLOBAL SCRIPTS -->
+<script th:src="@{/js/app.min.js}" type="text/javascript"></script>
+<!-- END THEME GLOBAL SCRIPTS -->
+<!-- BEGIN PAGE LEVEL SCRIPTS -->
+<script th:src="@{/js/login.js}" type="text/javascript"></script>
+<!-- END PAGE LEVEL SCRIPTS -->
+<!-- BEGIN THEME LAYOUT SCRIPTS -->
+<!-- END THEME LAYOUT SCRIPTS -->
 </body>
 
 </html>
