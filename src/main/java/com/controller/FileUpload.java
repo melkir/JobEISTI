@@ -12,6 +12,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 
 @Controller
+@RequestMapping(value = "/user")
 public class FileUpload {
 
     // Routing GET method to the upload.html form
