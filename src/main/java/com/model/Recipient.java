@@ -3,17 +3,16 @@ package com.model;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
+import java.sql.Date;
 import java.util.List;
 
 @Entity
 public class Recipient {
     @Id
     String name;
-    List<String> mailingList = new ArrayList<>();
-    SimpleDateFormat creationDate = new SimpleDateFormat("dd/MM/yyyy");
-    SimpleDateFormat editDate = new SimpleDateFormat("dd/MM/yyyy");
+    String mailingList;
+    Date creationDate;
+    Date editDate;
     @ManyToOne
     Newsletter newsletter;
 
@@ -28,11 +27,11 @@ public class Recipient {
         this.name = name;
     }
 
-    public List<String> getMailingList() {
+    public String getMailingList() {
         return mailingList;
     }
 
-    public void setMailingList(List<String> mailingList) {
+    public void setMailingList(String mailingList) {
         this.mailingList = mailingList;
     }
 
@@ -44,19 +43,11 @@ public class Recipient {
         this.newsletter = newsletter;
     }
 
-    public SimpleDateFormat getCreationDate() {
+    public Date getCreationDate() {
         return creationDate;
     }
 
-    public void setCreationDate(SimpleDateFormat creationDate) {
-        this.creationDate = creationDate;
-    }
-
-    public SimpleDateFormat getEditDate() {
+    public Date getEditDate() {
         return editDate;
-    }
-
-    public void setEditDate(SimpleDateFormat editDate) {
-        this.editDate = editDate;
     }
 }
