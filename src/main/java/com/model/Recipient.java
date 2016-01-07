@@ -4,7 +4,6 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import java.sql.Date;
-import java.util.List;
 
 @Entity
 public class Recipient {
