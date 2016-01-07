@@ -28,14 +28,14 @@ public class Registration {
     @RequestMapping(method = RequestMethod.GET)
     public String registerForm(Model model) {
         model.addAttribute("user", new User());
-        return "register";
+        return "home/register";
     }
 
     @RequestMapping(method = RequestMethod.POST)
     public String registerUser(@ModelAttribute("user") User user, HttpServletRequest request) {
         userRepository.createUser(user);
         authenticateUserAndSetSession(user, request); // auto-login after registration
-        return "redirect:/home";
+        return "redirect:/";
     }
 
     private void authenticateUserAndSetSession(User user, HttpServletRequest request) {
