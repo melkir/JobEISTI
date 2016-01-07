@@ -9,6 +9,7 @@
 <form th:action="@{/logout}" method="post">
     <input type="submit" value="Sign Out"/>
 </form>
+<p><a th:href="@{/admin/stats}">Statistiques du site</a></p>
 
 <div class="container">
     <h2>Liste des utilisateurs</h2>
@@ -30,7 +31,7 @@
             <td th:text="${user.username}"></td>
             <td th:text="${user.email}"></td>
             <td>
-                <a th:href="@{/admin/user/{id}/edit(id=${user.id})}">
+                <a th:href="@{/admin/user/{id}(id=${user.id})}">
                     <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
                 </a>
             </td>

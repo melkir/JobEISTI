@@ -19,17 +19,25 @@ public class Admin {
     public String index(Model model) {
         final List<User> users = userRepository.findAll();
         model.addAttribute("users", users);
-        return "admin";
+        return "admin/index";
     }
 
-    @RequestMapping(value = "user/{id}/edit", method = RequestMethod.GET)
+    @RequestMapping(value = "/stats", method = RequestMethod.GET)
+    public String showStats(Model model) {
+        Long countUser = userRepository.count();
+        model.addAttribute("countUser", countUser);
+        // Todo ajouter des informations sur les newsletters, ressources etc...
+        return "admin/stats";
+    }
+
+    @RequestMapping(value = "/user/{id}", method = RequestMethod.GET)
     public String updateUserById(@PathVariable("id") Long id, Model model) {
         User user = userRepository.findOne(id);
-        model.addAttribute("user", user);
-        return "editUser";
+        model.addAttribute(user);
+        return "admin/editUser";
     }
 
-    @RequestMapping(value = "user/{id}/edit", method = RequestMethod.POST)
+    @RequestMapping(value = "/user/{id}", method = RequestMethod.POST)
     @ResponseBody
     public String updateUserById(@PathVariable("id") Long id, @ModelAttribute User user) {
         try {

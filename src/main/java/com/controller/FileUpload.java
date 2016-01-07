@@ -18,7 +18,7 @@ public class FileUpload {
     // Routing GET method to the upload.html form
     @RequestMapping(value = "/upload", method = RequestMethod.GET)
     public String provideUploadInfo() {
-        return "upload";
+        return "user/upload";
     }
 
     // Routing POST form with the name and the file to internal server storage

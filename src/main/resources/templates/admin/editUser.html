@@ -6,7 +6,7 @@
 </head>
 <body>
 <div class="container">
-    <form class="form-horizontal" action="#" th:action="@{/admin/user/{id}/edit(id=${user.id})}" th:object="${user}"
+    <form class="form-horizontal" action="#" th:action="@{/admin/user/{id}(id=${user.id})}" th:object="${user}"
           method="post">
         <fieldset>
             <legend>Modification d'un utilisateur</legend>
