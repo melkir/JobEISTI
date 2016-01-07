@@ -40,7 +40,7 @@ public class CustomSuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
         String url;
         if (isAdmin(roles)) url = "/admin";
         else if (isEnt(roles)) url = "/enterprise";
-        else if (isUser(roles)) url = "/home";
+        else if (isUser(roles)) url = "/user";
         else if (isDba(roles)) url = "/db";
         else url = "/login?error";
 
