@@ -26,9 +26,9 @@
         <tbody>
         <tr th:each="user : ${users}">
             <td th:text="${user.firstName}"></td>
-            <td th:text="${user.lastName}">Doe</td>
-            <td th:text="${user.username}">MyUsername</td>
-            <td th:text="${user.email}">john@example.com</td>
+            <td th:text="${user.lastName}"></td>
+            <td th:text="${user.username}"></td>
+            <td th:text="${user.email}"></td>
             <td>
                 <a th:href="@{/admin/user/{id}/edit(id=${user.id})}">
                     <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
