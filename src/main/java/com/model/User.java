@@ -2,8 +2,10 @@ package com.model;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
+import java.sql.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -25,10 +27,19 @@ public class User {
     private String username;
     @NotEmpty(message = "Password is required.")
     private String password;
+    @CreatedDate
+    private Date creationDate;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "user", cascade = CascadeType.ALL)
     private Set<UserRole> userRoles = new HashSet<>(0);
-
+    @OneToMany(mappedBy = "creator")
+    private Set<Event> eventsCreated = new HashSet<>(0);
+    @OneToMany(mappedBy = "creator")
+    private Set<Offer> offersCreated = new HashSet<>(0);
+    @OneToMany(mappedBy = "creator")
+    private Set<Resource> resourcesCreated = new HashSet<>(0);
+    @OneToMany(mappedBy = "creator")
+    private Set<Newsletter> newsletterCreated = new HashSet<>(0);
 
     public User() {
     }
@@ -101,11 +112,38 @@ public class User {
         this.userRoles.add(new UserRole(this, role));
     }
 
+    public Date getCreationDate() {
+        return creationDate;
+    }
+
+    public Set<Event> getEventsCreated() {
+        return eventsCreated;
+    }
+
+    public Set<Offer> getOffersCreated() {
+        return offersCreated;
+    }
+
+    public Set<Resource> getResourcesCreated() {
+        return resourcesCreated;
+    }
+
+    public Set<Newsletter> getNewsletterCreated() {
+        return newsletterCreated;
+    }
+
     @Override
     public String toString() {
-        return String.format(
-                "Customer[id=%d, firstName='%s', lastName='%s', email='%s']",
-                id, firstName, lastName, email);
+        return "User{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", creationDate=" + creationDate +
+                ", userRoles=" + userRoles +
+                '}';
     }
 
 }
