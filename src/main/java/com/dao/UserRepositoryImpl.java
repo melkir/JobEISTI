@@ -22,6 +22,16 @@ public class UserRepositoryImpl implements UserRepositoryCustom {
     }
 
     @Override
+    public void updateUser(Long id, User user) {
+        User userDB = userRepository.findOne(id);
+        userDB.setFirstName(user.getFirstName());
+        userDB.setLastName(user.getLastName());
+        userDB.setEmail(user.getEmail());
+        userDB.setUsername(user.getUsername());
+        userRepository.save(userDB);
+    }
+
+    @Override
     public String resetPassword(User user) {
         String password = generateRandomPassword(8);
         user.setPassword(passwordEncoder.encode(password));
