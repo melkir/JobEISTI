@@ -274,7 +274,7 @@
                                                         <td th:text="${user.username}">MyUsername</td>
                                                         <td th:text="${user.email}">john@example.com</td>
                                                         <td>
-                                                            <a th:href="@{/admin/user/{id}/edit(id=${user.id})}">
+                                                            <a th:href="@{/admin/user/{id}(id=${user.id})}">
                                                                 <span class="glyphicon glyphicon-edit"
                                                                       aria-hidden="true"></span>
                                                             </a>
