@@ -18,16 +18,18 @@ public class Admin {
     @RequestMapping(method = RequestMethod.GET)
     public String index(Model model) {
         final List<User> users = userRepository.findAll();
+        Long countUser = userRepository.count();
         model.addAttribute("users", users);
+        model.addAttribute("countUser", countUser);
         return "admin/index";
     }
 
-    @RequestMapping(value = "/stats", method = RequestMethod.GET)
+    @RequestMapping(value = "", method = RequestMethod.GET)
     public String showStats(Model model) {
         Long countUser = userRepository.count();
         model.addAttribute("countUser", countUser);
         // Todo ajouter des informations sur les newsletters, ressources etc...
-        return "admin/stats";
+        return "admin";
     }
 
     @RequestMapping(value = "/user/{id}", method = RequestMethod.GET)
