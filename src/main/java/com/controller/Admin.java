@@ -24,14 +24,6 @@ public class Admin {
         return "admin/index";
     }
 
-    @RequestMapping(value = "", method = RequestMethod.GET)
-    public String showStats(Model model) {
-        Long countUser = userRepository.count();
-        model.addAttribute("countUser", countUser);
-        // Todo ajouter des informations sur les newsletters, ressources etc...
-        return "admin";
-    }
-
     @RequestMapping(value = "/user/{id}", method = RequestMethod.GET)
     public String updateUserById(@PathVariable("id") Long id, Model model) {
         User user = userRepository.findOne(id);
