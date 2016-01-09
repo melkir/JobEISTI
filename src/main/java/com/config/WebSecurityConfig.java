@@ -29,6 +29,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers("/webjars/**").permitAll();
         http.authorizeRequests().antMatchers("/css/**").permitAll();
         http.authorizeRequests().antMatchers("/js/**").permitAll();
+        http.authorizeRequests().antMatchers("/fonts/**").permitAll();
         // Roles permissions
         http.authorizeRequests()
                 // Directories access permissions
